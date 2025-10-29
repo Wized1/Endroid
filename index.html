@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Endroid Dashboard</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> <!-- Material Icons -->
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #121212; /* Dark mode background */
+      color: #fff;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    /* Header */
+    header {
+      background-color: #6200ea; /* Primary color */
+      color: white;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    header img {
+      width: 40px; /* Logo size */
+      height: 40px;
+      border-radius: 50%; /* Round the logo */
+    }
+
+    /* Main Container */
+    .main-container {
+      display: flex;
+      flex-grow: 1;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      overflow-y: auto;
+      padding: 16px;
+    }
+
+    /* Project Cards */
+    .project-card {
+      background-color: #1e1e1e;
+      border-radius: 16px; /* Rounded corners */
+      margin: 16px;
+      padding: 20px;
+      width: 300px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Soft shadow effect */
+    }
+
+    .project-title {
+      font-size: 20px;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    .project-description {
+      font-size: 14px;
+      color: #b0b0b0;
+      margin-bottom: 16px;
+    }
+
+    .project-btn {
+      background-color: #03dac6;
+      color: #121212;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: center;
+      font-weight: 500;
+      transition: background-color 0.3s ease;
+    }
+
+    .project-btn:hover {
+      background-color: #018786;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #121212;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      font-size: 14px;
+      margin-top: auto; /* Make footer stick at the bottom */
+    }
+
+    /* Button Container */
+    .button-container {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      gap: 10px;
+      flex-direction: row;
+    }
+
+    .toggle-btn,
+    .digital-btn {
+      background-color: #FF8C00; /* Accent color */
+      color: white;
+      border: none;
+      padding: 15px;
+      font-size: 16px;
+      border-radius: 50%; /* Circular buttons */
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 50px; /* Fixed width for circular shape */
+      height: 50px; /* Fixed height for circular shape */
+    }
+
+    .toggle-btn:hover,
+    .digital-btn:hover {
+      background-color: #FF6F00;
+    }
+
+    .material-icons {
+      vertical-align: middle;
+      font-size: 24px; /* Icon size */
+    }
+
+    /* Light Mode styles */
+    body.light-mode {
+      background-color: #F4F4F4; /* Light background for light mode */
+    }
+
+    .clock-container.light-mode .clock-face {
+      background: url('https://raw.githubusercontent.com/Wized1/Clock/main/bg.jpeg') no-repeat center; /* Ensure light mode background */
+      background-size: contain;
+    }
+
+    .toggle-btn.light-mode {
+      background-color: #FF5722; /* Light mode accent color */
+    }
+
+    /* Dark Mode styles */
+    body.dark-mode {
+      background-color: #121212; /* Dark background for dark mode */
+    }
+
+    .clock-container.dark-mode .clock-face {
+      background: url('https://raw.githubusercontent.com/Wized1/Clock/main/bg.jpeg') no-repeat center; /* Ensure dark mode background image */
+      background-size: contain;
+    }
+
+    .toggle-btn.dark-mode {
+      background-color: #FF5722; /* Light mode accent color for toggle */
+    }
+
+  </style>
+</head>
+<body>
+  <!-- Header Section with Logo and Title -->
+  <header>
+    <img src="logo.png" alt="Endroid Logo"> <!-- Logo -->
+    Endroid Dashboard
+  </header>
+
+  <!-- Main Container with Project Details -->
+  <div class="main-container">
+    <!-- Project 1 -->
+    <div class="project-card">
+      <div class="project-title">Endroid Search</div>
+      <div class="project-description">A modern, customizable search engine with seamless engine switching.</div>
+      <button class="project-btn" onclick="window.location.href='https://wized1.github.io/Search/'">Visit Project</button>
+    </div>
+
+    <!-- Project 2 -->
+    <div class="project-card">
+      <div class="project-title">Endroid Clock</div>
+      <div class="project-description">An interactive analog and digital clock app with Material You themes.</div>
+      <button class="project-btn" onclick="window.location.href='https://wized1.github.io/Clock/'">Visit Project</button>
+    </div>
+
+    <!-- Add more projects as needed -->
+  </div>
+
+  <!-- Footer Section -->
+  <footer>
+    © 2025 Endroid | All Rights Reserved
+  </footer>
+
+  <script>
+    // Dark Mode and Light Mode Toggle (if required)
+    const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (prefersDarkMode) {
+      document.body.classList.add('dark-mode'); // Apply dark mode if system preference is dark
+    } else {
+      document.body.classList.add('light-mode'); // Apply light mode otherwise
+    }
+
+    // Toggle between light and dark mode and store the choice in localStorage
+    const toggleBtn = document.getElementById('toggleBtn');
+    toggleBtn.addEventListener('click', () => {
+      const isLightMode = document.body.classList.contains('light-mode');
+      if (isLightMode) {
+        document.body.classList.remove('light-mode');
+        document.body.classList.add('dark-mode');
+        localStorage.setItem('theme', 'dark-mode');
+      } else {
+        document.body.classList.remove('dark-mode');
+        document.body.classList.add('light-mode');
+        localStorage.setItem('theme', 'light-mode');
+      }
+    });
+  </script>
+</body>
+</html>
