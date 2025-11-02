@@ -43,14 +43,30 @@ This project includes several key apps and platforms built around the **Material
 
 ---
 
-### 3. **Other Projects** (Coming Soon)
+### 3. **Endroid Notes**
+- **Description**: A beautiful, **offline-first**, privacy-focused notes app that works entirely in the browser. Perfect for quick thoughts, lists, or long-term journaling — **under 10 KB total size**.
+
+- **Key Features**:
+  - **100% Offline**: Uses `localStorage` for instant, automatic saving — no internet required.
+  - **Swipe-to-Delete**: Intuitive mobile gesture to remove notes.
+  - **Auto-Save**: Every keystroke is saved instantly.
+  - **Light & Dark Mode**: Persists via `localStorage`, with system preference auto-detection.
+  - **PWA Installable**: Add to home screen on Android, iOS, or desktop for a native app feel.
+  - **Zero Dependencies**: No login, no sync, no trackers — pure privacy.
+  - **Material You Styling**: Clean, modern, animated UI with smooth transitions.
+
+- [![Visit Endroid Notes](https://img.shields.io/badge/Visit%20Project-Endroid%20Notes-%2303DAC6?style=for-the-badge&logo=note)](https://wized1.github.io/Notes/)
+
+---
+
+### 4. **Other Projects** (Coming Soon)
 - More exciting projects are in the pipeline! Stay tuned for future releases.
 
 ---
 
 ## Installation Instructions
 
-### For **Web Projects** (like Endroid Search and Endroid Clock):
+### For **Web Projects** (like Endroid Search, Endroid Clock, and Endroid Notes):
 
 1. **Clone the Repository**:
    ```bash
