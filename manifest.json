@@ -1,0 +1,15 @@
+{
+  "name": "Endroid Dashboard",
+  "short_name": "Endroid",
+  "start_url": "/Endroid/",
+  "display": "standalone",
+  "background_color": "#121212",
+  "theme_color": "#03dac6",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "192x192 512x512",
+      "type": "image/png"
+    }
+  ]
+}
