@@ -72,3 +72,11 @@ This project includes several key apps and platforms built around the **Material
    ```bash
    git clone https://github.com/Wized1/Endroid.git
    cd Endroid
+
+---
+
+## Collaborate
+
+Join our **Project Endroid Collaboration WhatsApp Group** to share ideas, contribute to projects, and stay updated with the latest developments:  
+
+[Join WhatsApp Group](https://igit.me/Endroid-WhatsApp)
