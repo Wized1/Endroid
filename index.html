@@ -1,288 +1,278 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Endroid</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Rounded" rel="stylesheet">
-  <link rel="manifest" href="manifest.json">
-  <link rel="icon" href="icon.png" type="image/png">
-  <style>
-    :root {
-      --md-sys-color-primary: #03dac6;
-      --md-sys-color-primary-container: #018786;
-      --md-sys-color-on-primary: #000000;
-      --md-sys-color-secondary: #6200ea;
-      --md-sys-color-surface: #121212;
-      --md-sys-color-surface-container: #1e1e1e;
-      --md-sys-color-on-surface: #ffffff;
-      --md-sys-color-outline: #03dac6;
-      --md-sys-color-shadow: rgba(0,0,0,0.4);
-      --md-sys-typescale-title-large: 22px;
-      --md-sys-typescale-body-large: 16px;
-      --md-sys-motion-easing: cubic-bezier(0.2, 0, 0, 1);
-    }
-    [data-theme="light"] {
-      --md-sys-color-primary: #018786;
-      --md-sys-color-primary-container: #03dac6;
-      --md-sys-color-on-primary: #ffffff;
-      --md-sys-color-secondary: #6200ea;
-      --md-sys-color-surface: #f9f9f9;
-      --md-sys-color-surface-container: #ffffff;
-      --md-sys-color-on-surface: #121212;
-      --md-sys-color-outline: #018786;
-      --md-sys-color-shadow: rgba(0,0,0,0.12);
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Roboto', sans-serif;
-      background: var(--md-sys-color-surface);
-      color: var(--md-sys-color-on-surface);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      overflow-x: hidden; /* Fixed: Only horizontal hidden, vertical scrolls */
-      overflow-y: auto; /* Allow vertical scroll */
-      transition: background 0.4s var(--md-sys-motion-easing);
-    }
-    /* Header */
-    header {
-      background: var(--md-sys-color-primary);
-      color: var(--md-sys-color-on-primary);
-      padding: 20px 24px;
-      text-align: center;
-      font-size: var(--md-sys-typescale-title-large);
-      font-weight: 500;
-      box-shadow: 0 4px 12px var(--md-sys-color-shadow);
-      position: relative;
-      z-index: 10;
-      transition: background 0.3s var(--md-sys-motion-easing);
-    }
-    /* Theme Toggle Button in Header */
-    .theme-toggle {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.1);
-      border: none;
-      color: var(--md-sys-color-on-primary);
-      font-size: 20px;
-      cursor: pointer;
-      transition: all 0.3s var(--md-sys-motion-easing);
-    }
-    .theme-toggle:hover {
-      background: rgba(255,255,255,0.2);
-      transform: scale(1.1);
-    }
-    [data-theme="light"] .theme-toggle {
-      background: rgba(0,0,0,0.1);
-      color: var(--md-sys-color-on-primary);
-    }
-    /* Main Container */
-    .main-container {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      overflow-y: auto; /* Fixed: Allow vertical scroll */
-      padding: 24px;
-      gap: 24px;
-    }
-    /* Cards Grid */
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-      width: 100%;
-      max-width: 800px;
-    }
-    .project-card {
-      background: var(--md-sys-color-surface-container);
-      border-radius: 16px;
-      padding: 24px;
-      box-shadow: 0 4px 12px var(--md-sys-color-shadow);
-      transition: all 0.3s var(--md-sys-motion-easing);
-      border: 1px solid var(--md-sys-color-outline);
-    }
-    .project-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 24px var(--md-sys-color-shadow);
-      border-color: var(--md-sys-color-primary);
-    }
-    .project-title {
-      font-size: var(--md-sys-typescale-title-large);
-      font-weight: 500;
-      margin-bottom: 8px;
-      color: var(--md-sys-color-primary);
-    }
-    .project-description {
-      font-size: var(--md-sys-typescale-body-large);
-      color: var(--md-sys-color-on-surface);
-      opacity: 0.8;
-      margin-bottom: 16px;
-      line-height: 1.5;
-    }
-    .project-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      width: 100%;
-      padding: 12px 20px;
-      background: var(--md-sys-color-primary);
-      color: var(--md-sys-color-on-primary);
-      border: none;
-      border-radius: 12px;
-      font-size: 14px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.3s var(--md-sys-motion-easing);
-      text-decoration: none;
-      justify-content: center;
-    }
-    .project-btn:hover {
-      background: var(--md-sys-color-primary-container);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(3, 218, 198, 0.3);
-    }
-    .material-symbols-rounded {
-      font-size: 18px;
-      font-variation-settings: 'FILL' 1;
-    }
-    /* Footer */
-    footer {
-      background: var(--md-sys-color-surface-container);
-      color: var(--md-sys-color-on-surface);
-      text-align: center;
-      padding: 16px;
-      font-size: 14px;
-      opacity: 0.8;
-      border-top: 1px solid var(--md-sys-color-outline);
-    }
-    /* Mobile */
-    @media (max-width: 768px) {
-      .cards-grid { grid-template-columns: 1fr; gap: 16px; }
-      .main-container { padding: 16px; }
-      header { padding: 16px; }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Endroid Maze</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon.png" type="image/png">
+<link rel="apple-touch-icon" href="icon.svg">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Maze">
+<meta name="theme-color" content="#03dac6">
+<meta name="description" content="A fun and challenging maze game built with pure JavaScript and HTML Canvas. Try to find the exit!">
+
+<meta property="og:title" content="Endroid Maze">
+<meta property="og:description" content="A fun and challenging maze game built with pure JavaScript and HTML Canvas. Try to find the exit!">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://Wized1.github.io/Maze/">
+<meta property="og:image" content="icon.svg"> 
+<meta property="og:locale" content="en_US">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@yourtwitterhandle"> 
+<meta name="twitter:creator" content="@yourtwitterhandle">
+<meta name="twitter:title" content="Endroid Maze">
+<meta name="twitter:description" content="A fun and challenging maze game built with pure JavaScript and HTML Canvas. Try to find the exit!">
+<meta name="twitter:image" content="icon.svg">
+
+<style>
+html,body{margin:0;padding:0;height:100%;background:#000022;display:flex;justify-content:center;align-items:center;}
+.wrap{width:95vw;height:95vh;display:flex;justify-content:center;align-items:center;position:relative;}
+canvas{background:#000022;border-radius:12px;box-shadow:0 8px 30px rgba(5,30,60,0.12);touch-action:none;display:block;}
+
+/* joystick */
+#joystick{
+  position:absolute;bottom:30px;left:30px;width:120px;height:120px;border-radius:50%;
+  background:rgba(255,255,255,0.15);touch-action:none;display:flex;justify-content:center;align-items:center;
+  font-size:20px;font-weight:bold;color:white;user-select:none;pointer-events:auto;
+}
+#arrows{
+  position:absolute;width:100%;height:100%;display:grid;
+  grid-template-columns:1fr 1fr 1fr;grid-template-rows:1fr 1fr 1fr;
+  text-align:center;align-items:center;justify-items:center;pointer-events:none;
+}
+#arrows div{opacity:0.5;}
+#stick{position:absolute;width:60px;height:60px;background:#00ccff;border-radius:50%;top:30px;left:30px;touch-action:none;}
+
+/* win screen overlay */
+#winScreen{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  background:rgba(255,255,255,0.9);padding:30px 50px;border-radius:12px;
+  font-size:24px;color:#00ccff;font-weight:bold;display:none;text-align:center;
+  box-shadow:0 8px 30px rgba(5,30,60,0.2);
+}
+</style>
 </head>
-<body data-theme="dark">
-
-  <!-- Header with Theme Toggle -->
-  <header>
-    Endroid Dashboard
-    <button class="theme-toggle" id="themeToggle">
-      <span class="material-symbols-rounded" id="themeIcon">dark_mode</span>
-    </button>
-  </header>
-
-  <!-- Main Container -->
-  <div class="main-container">
-    <!-- Cards Grid -->
-    <div class="cards-grid">
-    <!-- Endroid Ai -->
-      <div class="project-card">
-        <div class="project-title">Endroid Ai</div>
-        <div class="project-description">A free and Open-Source Ai powered by Gemini 2.0 Flash, with Material You 3 Expressive theme, icons, and seemless dark and light theme.</div>
-        <a href="https://wized1.github.io/Ai/" class="project-btn">
-          <span class="material-symbols-rounded">smart_toy</span>
-          Visit Project
-        </a>
-      </div>
-      
-      <!-- Endroid Search -->
-      <div class="project-card">
-        <div class="project-title">Endroid Search</div>
-        <div class="project-description">A modern, customizable search engine with seamless experience.</div>
-        <a href="https://wized1.github.io/Search/" class="project-btn">
-          <span class="material-symbols-rounded">search</span>
-          Visit Project
-        </a>
-      </div>
-
-      <!-- Endroid Clock -->
-      <div class="project-card">
-        <div class="project-title">Endroid Clock</div>
-        <div class="project-description">An interactive analog and digital clock app with Material You theme.</div>
-        <a href="https://wized1.github.io/Clock/" class="project-btn">
-          <span class="material-symbols-rounded">schedule</span>
-          Visit Project
-        </a>
-      </div>
-
-      <!-- Endroid Notes -->
-      <div class="project-card">
-        <div class="project-title">Endroid Notes</div>
-        <div class="project-description">A beautiful offline notes app with swipe-to-delete and auto-save.</div>
-        <a href="https://wized1.github.io/Notes/" class="project-btn">
-          <span class="material-symbols-rounded">note</span>
-          Visit Project
-        </a>
-      </div>
-
-      <!-- Endroid Calculator -->
-      <div class="project-card">
-        <div class="project-title">Endroid Calculator</div>
-        <div class="project-description">A beautiful  Calculator app with Material You 3 Expressive theme and  icons.</div>
-        <a href="https://wized1.github.io/Calculator/" class="project-btn">
-          <span class="material-symbols-rounded">calculate</span>
-          Visit Project
-        </a>
-      </div>
-
-      <!-- Other Projects -->
-      <div class="project-card">
-        <div class="project-title">Other Projects</div>
-        <div class="project-description">More exciting projects coming soon. Stay tuned for updates!</div>
-        <a href="https://github.com/Wized1" class="project-btn">
-          <span class="material-symbols-rounded">code</span>
-          View All on GitHub
-        </a>
-      </div>
+<body>
+<div class="wrap">
+  <canvas id="c"></canvas>
+  <div id="joystick">
+    <div id="arrows">
+      <div></div><div>↑</div><div></div>
+      <div>←</div><div></div><div>→</div>
+      <div></div><div>↓</div><div></div>
     </div>
+    <div id="stick"></div>
   </div>
+  <div id="winScreen">You Win 🎉</div>
+  <div id="winScreen">Desktop Site for difficult mode</div>
+</div>
 
-  <!-- Footer -->
-  <footer>
-    © 2025 Endroid | All Rights Reserved | <a href="https://github.com/Wized1/Endroid" style="color: var(--md-sys-color-primary);">GitHub</a>
-  </footer>
+<script>
+// ... (Your original JavaScript code remains here) ...
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d', {alpha:false});
+const joystick = document.getElementById('joystick');
+const stick = document.getElementById('stick');
+const winScreen = document.getElementById('winScreen');
 
-  <script>
-    const themeToggle = document.getElementById('themeToggle');
-    const themeIcon = document.getElementById('themeIcon');
+let W,H,cols,rows,cell,maze=[];
+let ball={x:0,y:0,vx:0,vy:0,r:0},goal={x:0,y:0,r:0};
+const wallW = 6;
+const accel = 0.4;
+const damping = 0.97;
+const gravity = 0.07;  // subtle gravity
+const maxVelocity = 10;
+const bounceFactor = 0.3; // subtle bounce
 
-    // Load saved theme
-    document.addEventListener('DOMContentLoaded', () => {
-      const savedTheme = localStorage.getItem('endroid-dashboard-theme') || 'dark';
-      document.body.dataset.theme = savedTheme;
-      updateThemeIcon();
-    });
+// trail
+const trail = [];
+const maxTrailLength = 12; // number of positions
 
-    // Toggle theme
-    themeToggle.addEventListener('click', () => {
-      const isDark = document.body.dataset.theme === 'dark';
-      const newTheme = isDark ? 'light' : 'dark';
-      document.body.dataset.theme = newTheme;
-      localStorage.setItem('endroid-dashboard-theme', newTheme);
-      updateThemeIcon();
-    });
+function resize(){
+  W = canvas.parentElement.clientWidth;
+  H = canvas.parentElement.clientHeight;
+  canvas.width = W;
+  canvas.height = H;
+  const targetCols = Math.max(5,Math.round(W/56));
+  const targetRows = Math.max(5,Math.round(H/56));
+  const pad = 24;
+  cell = Math.max(28,Math.floor(Math.min((W-pad*2)/targetCols,(H-pad*2)/targetRows)));
+  cols = Math.floor((W-pad*2)/cell);
+  rows = Math.floor((H-pad*2)/cell);
+  ball.r = Math.round(cell*0.28);
+  goal.r = Math.round(cell*0.4);
+  buildMaze();
+}
 
-    function updateThemeIcon() {
-      themeIcon.textContent = document.body.dataset.theme === 'dark' ? 'dark_mode' : 'light_mode';
+function buildMaze(){
+  maze=[];
+  for(let y=0;y<rows;y++){maze[y]=[];for(let x=0;x<cols;x++)maze[y][x]={v:false,w:[1,1,1,1]};}
+  const stack=[];let cx=0,cy=0;maze[0][0].v=true;let visited=1,total=cols*rows;
+  while(visited<total){
+    const n=[];
+    if(cy>0&&!maze[cy-1][cx].v)n.push(['up',cx,cy-1]);
+    if(cx<cols-1&&!maze[cy][cx+1].v)n.push(['right',cx+1,cy]);
+    if(cy<rows-1&&!maze[cy+1][cx].v)n.push(['down',cx,cy+1]);
+    if(cx>0&&!maze[cy][cx-1].v)n.push(['left',cx-1,cy]);
+    if(n.length){
+      const nxt=n[Math.floor(Math.random()*n.length)]; const dir=nxt[0],nx=nxt[1],ny=nxt[2];
+      if(dir==='up'){maze[cy][cx].w[0]=0;maze[ny][nx].w[2]=0;}
+      if(dir==='right'){maze[cy][cx].w[1]=0;maze[ny][nx].w[3]=0;}
+      if(dir==='down'){maze[cy][cx].w[2]=0;maze[ny][nx].w[0]=0;}
+      if(dir==='left'){maze[cy][cx].w[3]=0;maze[ny][nx].w[1]=0;}
+      stack.push([cx,cy]);cx=nx;cy=ny;maze[cy][cx].v=true;visited++;
+    }else{const p=stack.pop();if(!p)break;cx=p[0];cy=p[1];}
+  }
+  const ox = Math.round((W - cols*cell)/2);
+  const oy = Math.round((H - rows*cell)/2);
+  ball.x = ox+cell/2; ball.y = oy+cell/2; ball.vx=0; ball.vy=0;
+  goal.x = ox+(cols-0.5)*cell; goal.y = oy+(rows-0.5)*cell;
+  trail.length = 0; // clear trail on new maze
+}
+
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  const ox = Math.round((W - cols*cell)/2);
+  const oy = Math.round((H - rows*cell)/2);
+  // neon walls
+  for(let y=0;y<rows;y++){
+    for(let x=0;x<cols;x++){
+      const c=maze[y][x];const sx=ox+x*cell;const sy=oy+y*cell;
+      ctx.strokeStyle = "#0ff"; ctx.shadowColor="#0ff"; ctx.shadowBlur=10; ctx.lineWidth=wallW;
+      if(c.w[0]){ctx.beginPath();ctx.moveTo(sx,sy);ctx.lineTo(sx+cell,sy);ctx.stroke();}
+      if(c.w[1]){ctx.beginPath();ctx.moveTo(sx+cell,sy);ctx.lineTo(sx+cell,sy+cell);ctx.stroke();}
+      if(c.w[2]){ctx.beginPath();ctx.moveTo(sx+cell,sy+cell);ctx.lineTo(sx,sy+cell);ctx.stroke();}
+      if(c.w[3]){ctx.beginPath();ctx.moveTo(sx,sy+cell);ctx.lineTo(sx,sy);ctx.stroke();}
     }
+  }
+  ctx.shadowBlur=0;
 
-    // Auto-detect system theme
-    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', e => {
-      if (!localStorage.getItem('endroid-dashboard-theme')) {
-        document.body.dataset.theme = e.matches ? 'light' : 'dark';
-        updateThemeIcon();
-      }
+  // goal neon
+  ctx.beginPath();ctx.fillStyle="#00ffcc";ctx.shadowColor="#00ffcc";ctx.shadowBlur=20;ctx.arc(goal.x,goal.y,goal.r,0,2*Math.PI);ctx.fill();
+  ctx.beginPath();ctx.fillStyle="#ffd700";ctx.arc(goal.x,goal.y,goal.r*0.5,0,2*Math.PI);ctx.fill();
+  ctx.shadowBlur=0;
+
+  // draw trail
+  for(let i=0;i<trail.length;i++){
+    const p = trail[i];
+    const alpha = (i+1)/trail.length*0.4; // fading effect
+    ctx.beginPath();
+    ctx.fillStyle = `rgba(0,204,255,${alpha})`;
+    ctx.shadowColor="#00ccff";
+    ctx.shadowBlur=10;
+    ctx.arc(p.x,p.y,ball.r*0.9,0,2*Math.PI);
+    ctx.fill();
+  }
+  ctx.shadowBlur=0;
+
+  // ball neon
+  ctx.beginPath();ctx.fillStyle="#00ccff";ctx.shadowColor="#00ccff";ctx.shadowBlur=20;ctx.arc(ball.x,ball.y,ball.r,0,2*Math.PI);ctx.fill();
+  ctx.shadowBlur=0;
+}
+
+function collide(){
+  const ox = Math.round((W - cols*cell)/2);
+  const oy = Math.round((H - rows*cell)/2);
+  const cx = Math.floor((ball.x - ox)/cell);
+  const cy = Math.floor((ball.y - oy)/cell);
+  if(cx<0||cy<0||cx>=cols||cy>=rows)return;
+  const c = maze[cy][cx];
+  const px = ox+cx*cell, py = oy+cy*cell;
+  if(c.w[0] && ball.y-ball.r<py){ ball.y=py+ball.r; if(ball.vy<0)ball.vy=-ball.vy*bounceFactor; }
+  if(c.w[2] && ball.y+ball.r>py+cell){ ball.y=py+cell-ball.r; if(ball.vy>0)ball.vy=-ball.vy*bounceFactor; }
+  if(c.w[3] && ball.x-ball.r<px){ ball.x=px+ball.r; if(ball.vx<0)ball.vx=-ball.vx*bounceFactor; }
+  if(c.w[1] && ball.x+ball.r>px+cell){ ball.x=px+cell-ball.r; if(ball.vx>0)ball.vx=-ball.vx*bounceFactor; }
+}
+
+let showWin = false;
+function update(){
+  ball.vy += gravity;
+  if(ball.vx>maxVelocity)ball.vx=maxVelocity;
+  if(ball.vx<-maxVelocity)ball.vx=-maxVelocity;
+  if(ball.vy>maxVelocity)ball.vy=maxVelocity;
+  if(ball.vy<-maxVelocity)ball.vy=-maxVelocity;
+  ball.x+=ball.vx; ball.y+=ball.vy;
+  collide();
+
+  // update trail
+  trail.push({x:ball.x,y:ball.y});
+  if(trail.length>maxTrailLength)trail.shift();
+
+  const dx = ball.x - goal.x, dy = ball.y - goal.y;
+  if(Math.hypot(dx,dy)<ball.r+goal.r*0.6 && !showWin){
+    showWin=true;
+    winScreen.style.display='block';
+    setTimeout(()=>{winScreen.style.display='none'; showWin=false; buildMaze();},3000);
+  }
+}
+
+const keys={up:0,down:0,left:0,right:0};
+window.addEventListener('keydown',e=>{
+  if(e.key==='ArrowUp'||e.key==='w')keys.up=1;
+  if(e.key==='ArrowDown'||e.key==='s')keys.down=1;
+  if(e.key==='ArrowLeft'||e.key==='a')keys.left=1;
+  if(e.key==='ArrowRight'||e.key==='d')keys.right=1;
+});
+window.addEventListener('keyup',e=>{
+  if(e.key==='ArrowUp'||e.key==='w')keys.up=0;
+  if(e.key==='ArrowDown'||e.key==='s')keys.down=0;
+  if(e.key==='ArrowLeft'||e.key==='a')keys.left=0;
+  if(e.key==='ArrowRight'||e.key==='d')keys.right=0;
+});
+
+let stickActive=false;
+let stickCenter={x:0,y:0};
+stick.addEventListener('pointerdown',e=>{
+  stickActive=true; stickCenter={x:e.clientX,y:e.clientY};
+  stick.setPointerCapture(e.pointerId);
+});
+stick.addEventListener('pointermove',e=>{
+  if(!stickActive)return;
+  let dx = e.clientX - stickCenter.x;
+  let dy = e.clientY - stickCenter.y;
+  const max = 50;
+  let dist = Math.hypot(dx,dy);
+  if(dist>max){dx=dx*max/dist; dy=dy*max/dist;}
+  stick.style.transform = `translate(${dx}px,${dy}px)`;
+  ball.vx += dx/30; ball.vy += dy/30;
+});
+stick.addEventListener('pointerup',e=>{
+  stickActive=false; stick.style.transform='translate(0,0)';
+  stick.releasePointerCapture(e.pointerId);
+});
+
+function loop(){
+  ball.vx += (keys.right-keys.left)*accel;
+  ball.vy += (keys.down-keys.up)*accel;
+  update();
+  draw();
+  requestAnimationFrame(loop);
+}
+
+window.addEventListener('resize',resize);
+resize();
+loop();
+</script>
+
+<script>
+  /**
+   * Register the Service Worker for Offline Access
+   */
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/service-worker.js')
+        .then(registration => {
+          console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        })
+        .catch(error => {
+          console.log('ServiceWorker registration failed: ', error);
+        });
     });
-  </script>
+  }
+</script>
+
 </body>
-</html>
+                   </html>
